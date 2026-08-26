@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empire</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="game">
+
+<header class="top-bar">
+    <div>
+        <h1>Empire</h1>
+        <span id="level">المستوى 1</span>
+    </div>
+
+    <div class="money-box">
+        💰 <span id="money">0</span> $
+    </div>
+</header>
+
+
+<section class="company-card">
+
+    <div class="company-icon">🏢</div>
+
+    <h2>إمبراطوريتك</h2>
+
+    <p>
+        المجال:
+        <strong id="fieldName">غير محدد</strong>
+    </p>
+
+    <button id="tapButton" class="tap-button">
+        اضغط
+        <span>+$<b id="clickValue">1</b></span>
+    </button>
+
+    <div class="income">
+        دخل الموظفين:
+        <strong>$<span id="income">0</span>/ثانية</strong>
+    </div>
+
+</section>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <span>⭐</span>
+        <small>XP</small>
+        <strong>
+            <span id="xp">0</span> /
+            <span id="xpNeeded">100</span>
+        </strong>
+    </div>
+
+    <div class="stat">
+        <span>🏢</span>
+        <small>الشركات</small>
+        <strong id="companies">1</strong>
+    </div>
+
+    <div class="stat">
+        <span>👨‍💼</span>
+        <small>الموظفون</small>
+        <strong id="employees">0</strong>
+    </div>
+
+</div>
+
+
+<nav class="menu">
+
+    <button class="menu-button" onclick="showPage('home')">
+        🏠
+        <span>الرئيسية</span>
+    </button>
+
+    <button class="menu-button" onclick="showPage('store')">
+        🛒
+        <span>المتجر</span>
+    </button>
+
+    <button class="menu-button" onclick="showPage('area')">
+        🗺️
+        <span>منطقتك</span>
+    </button>
+
+    <button class="menu-button" onclick="showPage('companiesPage')">
+        🏢
+        <span>الشركات</span>
+    </button>
+
+    <button class="menu-button" onclick="showPage('office')">
+        💼
+        <span>المكتب</span>
+    </button>
+
+    <button class="menu-button" onclick="showPage('profits')">
+        📈
+        <span>الأرباح</span>
+    </button>
+
+</nav>
+
+
+<section id="home" class="page active">
+
+    <h2>التطوير</h2>
+
+    <div class="field-card">
+
+        <h3>مجالك الحالي</h3>
+
+        <div id="currentField">
+            لم يتم اختيار مجال.
+        </div>
+
+        <button
+            class="upgrade-button"
+            onclick="openFieldSelector()">
+            اختيار / تغيير المجال
+        </button>
+
+        <small>
+            تغيير المجال مقابل 2,000,000$
+        </small>
+
+    </div>
+
+
+    <div class="upgrade-card">
+
+        <div class="upgrade-info">
+            <strong>💰 قيمة الضغطة</strong>
+            <span>
+                كل تطوير يزيد المال الذي تحصل عليه من الضغطة.
+            </span>
+        </div>
+
+        <button id="upgradeClick" class="upgrade-button">
+            تطوير
+        </button>
+
+    </div>
+
+
+    <div class="upgrade-card">
+
+        <div class="upgrade-info">
+            <strong>👨‍💼 الموظفون</strong>
+            <span>
+                يزيد الدخل التلقائي كل ثانية.
+            </span>
+        </div>
+
+        <button id="upgradeIncome" class="upgrade-button">
+            تطوير
+        </button>
+
+    </div>
+
+</section>
+
+
+<section id="store" class="page">
+
+    <h2>🛒 المتجر</h2>
+
+    <div class="categories">
+
+        <button onclick="storeCategory('realestate')">
+            🏠 عقارات
+        </button>
+
+        <button onclick="storeCategory('employees')">
+            👨‍💼 موظفين
+        </button>
+
+        <button onclick="storeCategory('companies')">
+            🏢 شركات
+        </button>
+
+    </div>
+
+    <div id="products" class="products"></div>
+
+</section>
+
+
+<section id="area" class="page">
+
+    <h2>🗺️ منطقتك</h2>
+
+    <div class="notice">
+        عدد الشركات:
+        <b id="areaCompanies">7</b>
+    </div>
+
+    <div class="map">
+
+        <div class="sea"></div>
+
+        <div class="land land1"></div>
+        <div class="land land2"></div>
+        <div class="land land3"></div>
+
+        <div class="road road1"></div>
+        <div class="road road2"></div>
+
+        <div id="ownedBuildings"></div>
+
+        <div class="building b1">🏢</div>
+        <div class="building b2">🏭</div>
+        <div class="building b3">🏬</div>
+        <div class="building b4">🏢</div>
+        <div class="building b5">🏭</div>
+
+        <div class="smoke s1">☁️</div>
+        <div class="smoke s2">☁️</div>
+        <div class="smoke s3">☁️</div>
+
+        <div class="map-label">
+            🌍 منطقتك
+        </div>
+
+        <div class="zoom-controls">
+            <button onclick="zoomMap(1)">+</button>
+            <button onclick="zoomMap(-1)">−</button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="companiesPage" class="page">
+
+    <h2>🏢 الشركات</h2>
+
+    <div class="categories">
+
+        <button onclick="companyType('near')">
+            📍 المجاورة
+        </button>
+
+        <button onclick="companyType('world')">
+            🌎 العالمية
+        </button>
+
+    </div>
+
+    <div id="companyList"></div>
+
+</section>
+
+
+<section id="office" class="page">
+
+    <h2>💼 مكتبك</h2>
+
+    <div class="office-card">
+
+        <div class="office-icon">🏢</div>
+
+        <h3>مقر الإمبراطورية</h3>
+
+        <p>
+            مستوى المكتب:
+            <strong id="officeLevel">1</strong>
+        </p>
+
+        <button id="upgradeOffice" class="upgrade-button">
+            تطوير المكتب
+        </button>
+
+    </div>
+
+
+    <div class="secretary">
+
+        <h3>👩‍💼 السكرتير</h3>
+
+        <p>
+            الاسم:
+            <strong id="secretaryName">غير محدد</strong>
+        </p>
+
+        <input
+            id="secretaryInput"
+            type="text"
+            maxlength="20"
+            placeholder="اكتب اسم السكرتير">
+
+        <button onclick="setSecretary()" class="upgrade-button">
+            حفظ الاسم
+        </button>
+
+        <div class="secretary-chat">
+
+            <div id="secretaryMessages">
+                السكرتير جاهز للعمل.
+            </div>
+
+            <input
+                id="secretaryChatInput"
+                type="text"
+                placeholder="كلم السكرتير...">
+
+            <button
+                onclick="talkToSecretary()"
+                class="upgrade-button">
+                إرسال
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="profits" class="page">
+
+    <h2>📈 الأرباح والإنتاج</h2>
+
+    <div class="profit-card">
+
+        <h3>📊 حالة الإمبراطورية</h3>
+
+        <p>
+            الدخل:
+            <strong class="green">
+                +$<span id="profitIncome">0</span>/ث
+            </strong>
+        </p>
+
+        <p>
+            المصروفات:
+            <strong class="red">
+                -$<span id="profitLoss">0</span>/ث
+            </strong>
+        </p>
+
+        <p>
+            صافي الربح:
+            <strong id="netProfit">0</strong>
+        </p>
+
+    </div>
+
+
+    <div class="chart">
+
+        <div class="arrow up">↗</div>
+
+        <div class="chart-line">
+            ▁▂▃▄▅▆▇█
+        </div>
+
+        <span>أداء الإمبراطورية</span>
+
+    </div>
+
+
+    <div class="resources">
+
+        <h3>📦 منتجاتك</h3>
+
+        <div id="resourceList"></div>
+
+    </div>
+
+</section>
+
+
+<section id="fieldPage" class="page">
+
+    <h2>🌾 اختيار المجال</h2>
+
+    <p class="notice">
+        المستخدم يختار المجال الذي ستعمل فيه الإمبراطورية.
+        تغيير المجال مقابل 2,000,000$.
+    </p>
+
+    <div id="fieldList"></div>
+
+</section>
+
+
+<section id="contractPage" class="page">
+
+    <h2>📜 عقد الشركة</h2>
+
+    <div class="contract">
+
+        <h3 id="contractTitle"></h3>
+
+        <div id="contractText"></div>
+
+        <button
+            onclick="acceptContract()"
+            class="accept-button">
+            توقيع وقبول العقد
+        </button>
+
+        <button
+            onclick="rejectContract()"
+            class="reject-button">
+            رفض
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>
