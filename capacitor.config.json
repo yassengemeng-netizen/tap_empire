@@ -1,5 +1,8 @@
 {
   "appId": "com.tapempire.game",
   "appName": "Tap Empire",
-  "webDir": "www"
+  "webDir": "www",
+  "server": {
+    "androidScheme": "http"
+  }
 }
