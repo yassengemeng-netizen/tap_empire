@@ -10,7 +10,6 @@
 
 <body>
 
-<!-- شاشة البداية -->
 <div id="introScreen" class="intro-screen">
 
     <div class="intro-logo">
@@ -60,8 +59,6 @@
         <strong id="fieldName">غير محدد</strong>
     </p>
 
-
-    <!-- زر الضغط الوحيد -->
     <button id="tapButton" class="tap-button">
 
         <span class="tap-title">
@@ -207,12 +204,9 @@
 </nav>
 
 
-<!-- الرئيسية -->
-
 <section id="home" class="page active">
 
     <h2>التطوير</h2>
-
 
     <div class="field-card">
 
@@ -222,7 +216,6 @@
             لم يتم اختيار مجال.
         </div>
 
-
         <button
             class="upgrade-button"
             onclick="openFieldSelector()">
@@ -230,7 +223,6 @@
             اختيار / تغيير المجال
 
         </button>
-
 
         <small>
             تغيير المجال مقابل 2,000,000$
@@ -252,7 +244,6 @@
             </span>
 
         </div>
-
 
         <button
             id="upgradeClick"
@@ -279,7 +270,6 @@
 
         </div>
 
-
         <button
             id="upgradeIncome"
             class="upgrade-button">
@@ -293,12 +283,9 @@
 </section>
 
 
-<!-- المتجر -->
-
 <section id="store" class="page">
 
     <h2>🛒 المتجر</h2>
-
 
     <div class="categories">
 
@@ -316,7 +303,6 @@
 
     </div>
 
-
     <div
         id="products"
         class="products">
@@ -325,12 +311,9 @@
 </section>
 
 
-<!-- المنطقة -->
-
 <section id="area" class="page">
 
     <h2>🗺️ منطقتك</h2>
-
 
     <div class="notice">
 
@@ -338,7 +321,6 @@
         <b id="areaCompanies">7</b>
 
     </div>
-
 
     <div class="map">
 
@@ -384,12 +366,9 @@
 </section>
 
 
-<!-- الشركات -->
-
 <section id="companiesPage" class="page">
 
     <h2>🏢 الشركات</h2>
-
 
     <div class="categories">
 
@@ -403,18 +382,14 @@
 
     </div>
 
-
     <div id="companyList"></div>
 
 </section>
 
 
-<!-- المكتب -->
-
 <section id="office" class="page">
 
     <h2>💼 مكتبك</h2>
-
 
     <div class="office-card">
 
@@ -433,7 +408,6 @@
             </strong>
         </p>
 
-
         <button
             id="upgradeOffice"
             class="upgrade-button">
@@ -449,7 +423,6 @@
 
         <h3>👩‍💼 السكرتير</h3>
 
-
         <p>
 
             الاسم:
@@ -459,13 +432,11 @@
 
         </p>
 
-
         <input
             id="secretaryInput"
             type="text"
             maxlength="20"
             placeholder="اكتب اسم السكرتير">
-
 
         <button
             onclick="setSecretary()"
@@ -482,12 +453,10 @@
                 السكرتير جاهز للعمل.
             </div>
 
-
             <input
                 id="secretaryChatInput"
                 type="text"
                 placeholder="كلم السكرتير...">
-
 
             <button
                 onclick="talkToSecretary()"
@@ -504,19 +473,15 @@
 </section>
 
 
-<!-- الأرباح -->
-
 <section id="profits" class="page">
 
     <h2>📈 الأرباح والإنتاج</h2>
-
 
     <div class="profit-card">
 
         <h3>
             📊 حالة الإمبراطورية
         </h3>
-
 
         <p>
 
@@ -528,7 +493,6 @@
 
         </p>
 
-
         <p>
 
             المصروفات:
@@ -538,7 +502,6 @@
             </strong>
 
         </p>
-
 
         <p>
 
@@ -583,14 +546,11 @@
 </section>
 
 
-<!-- اختيار المجال -->
-
 <section id="fieldPage" class="page">
 
     <h2>
         🌾 اختيار المجال
     </h2>
-
 
     <p class="notice">
 
@@ -599,13 +559,10 @@
 
     </p>
 
-
     <div id="fieldList"></div>
 
 </section>
 
-
-<!-- العقد -->
 
 <section id="contractPage" class="page">
 
@@ -613,13 +570,11 @@
         📜 عقد الشركة
     </h2>
 
-
     <div class="contract">
 
         <h3 id="contractTitle"></h3>
 
         <div id="contractText"></div>
-
 
         <button
             onclick="acceptContract()"
@@ -628,7 +583,6 @@
             توقيع وقبول العقد
 
         </button>
-
 
         <button
             onclick="rejectContract()"

@@ -335,6 +335,46 @@ const upgradeIncomeButton =
 
 
 /* =========================
+   رسائل السكرتير
+   =========================
+   كانت الدالة دي ناقصة في النسخة
+   السابقة، وده كان بيوقف JavaScript.
+========================= */
+
+function secretaryMessage(text) {
+
+    const container =
+        document.getElementById(
+            "secretaryMessages"
+        );
+
+    if (!container) {
+        return;
+    }
+
+
+    const message =
+        document.createElement(
+            "div"
+        );
+
+
+    message.className =
+        "secretary-message";
+
+
+    message.textContent =
+        text;
+
+
+    container.prepend(
+        message
+    );
+
+}
+
+
+/* =========================
    تحديث الواجهة
 ========================= */
 
@@ -404,7 +444,9 @@ function updateUI() {
     document.getElementById(
         "profitIncome"
     ).textContent =
-        Math.floor(incomePerSecond).toLocaleString();
+        Math.floor(
+            incomePerSecond
+        ).toLocaleString();
 
 
     document.getElementById(
@@ -416,7 +458,9 @@ function updateUI() {
     document.getElementById(
         "netProfit"
     ).textContent =
-        `+$${Math.floor(incomePerSecond).toLocaleString()}/ث`;
+        `+$${Math.floor(
+            incomePerSecond
+        ).toLocaleString()}/ث`;
 
 
     renderResources();
@@ -2111,96 +2155,107 @@ function gameSound(type) {
     }
 
 
-    const ctx =
-        getAudioContext();
+    try {
+
+        const ctx =
+            getAudioContext();
 
 
-    const oscillator =
-        ctx.createOscillator();
+        const oscillator =
+            ctx.createOscillator();
 
 
-    const gain =
-        ctx.createGain();
+        const gain =
+            ctx.createGain();
 
 
-    oscillator.connect(gain);
+        oscillator.connect(gain);
 
-    gain.connect(
-        ctx.destination
-    );
-
-
-    let frequency = 500;
-
-    let duration = 0.08;
+        gain.connect(
+            ctx.destination
+        );
 
 
-    if (type === "click") {
+        let frequency = 500;
 
-        frequency = 650;
-        duration = 0.05;
+        let duration = 0.08;
+
+
+        if (type === "click") {
+
+            frequency = 650;
+            duration = 0.05;
+
+        }
+
+
+        if (type === "buy") {
+
+            frequency = 800;
+            duration = 0.12;
+
+        }
+
+
+        if (type === "upgrade") {
+
+            frequency = 1000;
+            duration = 0.18;
+
+        }
+
+
+        if (type === "error") {
+
+            frequency = 180;
+            duration = 0.18;
+
+        }
+
+
+        if (type === "notification") {
+
+            frequency = 700;
+            duration = 0.15;
+
+        }
+
+
+        oscillator.frequency.value =
+            frequency;
+
+
+        oscillator.type =
+            "sine";
+
+
+        gain.gain.setValueAtTime(
+            0.08,
+            ctx.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            ctx.currentTime + duration
+        );
+
+
+        oscillator.start();
+
+
+        oscillator.stop(
+            ctx.currentTime + duration
+        );
+
+    } catch (error) {
+
+        console.log(
+            "تعذر تشغيل الصوت",
+            error
+        );
 
     }
-
-
-    if (type === "buy") {
-
-        frequency = 800;
-        duration = 0.12;
-
-    }
-
-
-    if (type === "upgrade") {
-
-        frequency = 1000;
-        duration = 0.18;
-
-    }
-
-
-    if (type === "error") {
-
-        frequency = 180;
-        duration = 0.18;
-
-    }
-
-
-    if (type === "notification") {
-
-        frequency = 700;
-        duration = 0.15;
-
-    }
-
-
-    oscillator.frequency.value =
-        frequency;
-
-
-    oscillator.type =
-        "sine";
-
-
-    gain.gain.setValueAtTime(
-        0.08,
-        ctx.currentTime
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        ctx.currentTime + duration
-    );
-
-
-    oscillator.start();
-
-
-    oscillator.stop(
-        ctx.currentTime + duration
-    );
 
 }
 
@@ -2219,99 +2274,110 @@ function startBackgroundMusic() {
     }
 
 
-    const ctx =
-        getAudioContext();
+    try {
+
+        const ctx =
+            getAudioContext();
 
 
-    const notes = [
+        const notes = [
 
-        261.63,
-        329.63,
-        392.00,
-        329.63,
-        293.66,
-        349.23,
-        440.00,
-        349.23
+            261.63,
+            329.63,
+            392.00,
+            329.63,
+            293.66,
+            349.23,
+            440.00,
+            349.23
 
-    ];
-
-
-    let index = 0;
+        ];
 
 
-    function playNote() {
+        let index = 0;
 
-        if (!audioEnabled) {
-            return;
+
+        function playNote() {
+
+            if (!audioEnabled) {
+                return;
+            }
+
+
+            const oscillator =
+                ctx.createOscillator();
+
+
+            const gain =
+                ctx.createGain();
+
+
+            oscillator.connect(gain);
+
+            gain.connect(
+                ctx.destination
+            );
+
+
+            oscillator.frequency.value =
+                notes[index];
+
+
+            oscillator.type =
+                "sine";
+
+
+            gain.gain.setValueAtTime(
+                0.018,
+                ctx.currentTime
+            );
+
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.001,
+                ctx.currentTime + 0.45
+            );
+
+
+            oscillator.start();
+
+
+            oscillator.stop(
+                ctx.currentTime + 0.45
+            );
+
+
+            index++;
+
+
+            if (
+                index >= notes.length
+            ) {
+
+                index = 0;
+
+            }
+
         }
 
 
-        const oscillator =
-            ctx.createOscillator();
+        playNote();
 
 
-        const gain =
-            ctx.createGain();
+        musicTimer =
+            setInterval(
+                playNote,
+                550
+            );
 
+    } catch (error) {
 
-        oscillator.connect(gain);
-
-        gain.connect(
-            ctx.destination
+        console.log(
+            "تعذر تشغيل الموسيقى",
+            error
         );
-
-
-        oscillator.frequency.value =
-            notes[index];
-
-
-        oscillator.type =
-            "sine";
-
-
-        gain.gain.setValueAtTime(
-            0.018,
-            ctx.currentTime
-        );
-
-
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            ctx.currentTime + 0.45
-        );
-
-
-        oscillator.start();
-
-
-        oscillator.stop(
-            ctx.currentTime + 0.45
-        );
-
-
-        index++;
-
-
-        if (
-            index >= notes.length
-        ) {
-
-            index = 0;
-
-        }
 
     }
-
-
-    playNote();
-
-
-    musicTimer =
-        setInterval(
-            playNote,
-            550
-        );
 
 }
 
@@ -2454,9 +2520,13 @@ if (startGameButton) {
         "click",
         function () {
 
-            introScreen.classList.add(
-                "hidden"
-            );
+            if (introScreen) {
+
+                introScreen.classList.add(
+                    "hidden"
+                );
+
+            }
 
 
             gameSound(
