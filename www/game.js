@@ -38,18 +38,22 @@ let resources = {
 };
 
 
-// المجالات
+/* =========================
+   المجالات
+========================= */
 
 const fields = {
 
     ranching: {
         name: "الرعي",
         icon: "🐑",
+
         employees: [
             "راعي",
             "طبيب بيطري",
             "عامل مزارع"
         ],
+
         resources: [
             ["🐑", "الأغنام", "sheep"],
             ["🥩", "اللحوم", "meat"],
@@ -61,11 +65,13 @@ const fields = {
     agriculture: {
         name: "الزراعة",
         icon: "🌾",
+
         employees: [
             "مزارع",
             "مهندس زراعي",
             "عامل ري"
         ],
+
         resources: [
             ["🌾", "المحاصيل", "crops"],
             ["🥬", "الخضروات", "products"],
@@ -76,11 +82,13 @@ const fields = {
     industry: {
         name: "الصناعة",
         icon: "🏭",
+
         employees: [
             "مهندس إنتاج",
             "فني",
             "عامل مصنع"
         ],
+
         resources: [
             ["🏭", "المصانع", "factories"],
             ["📦", "المنتجات", "products"]
@@ -90,11 +98,13 @@ const fields = {
     technology: {
         name: "التكنولوجيا",
         icon: "💻",
+
         employees: [
             "مبرمج",
             "مهندس برمجيات",
             "مسؤول تسويق"
         ],
+
         resources: [
             ["💻", "المنتجات الرقمية", "products"],
             ["📱", "التطبيقات", "products"]
@@ -104,7 +114,9 @@ const fields = {
 };
 
 
-// المنتجات
+/* =========================
+   المنتجات
+========================= */
 
 const products = {
 
@@ -228,7 +240,9 @@ const products = {
 };
 
 
-// الشركات
+/* =========================
+   الشركات
+========================= */
 
 const nearbyCompanies = [
 
@@ -282,22 +296,47 @@ const worldCompanies = [
 ];
 
 
-// عناصر HTML
+/* =========================
+   عناصر HTML
+========================= */
 
-const moneyElement = document.getElementById("money");
-const levelElement = document.getElementById("level");
-const xpElement = document.getElementById("xp");
-const xpNeededElement = document.getElementById("xpNeeded");
-const clickValueElement = document.getElementById("clickValue");
-const incomeElement = document.getElementById("income");
-const companiesElement = document.getElementById("companies");
-const employeesElement = document.getElementById("employees");
-const tapButton = document.getElementById("tapButton");
-const upgradeClickButton = document.getElementById("upgradeClick");
-const upgradeIncomeButton = document.getElementById("upgradeIncome");
+const moneyElement =
+    document.getElementById("money");
+
+const levelElement =
+    document.getElementById("level");
+
+const xpElement =
+    document.getElementById("xp");
+
+const xpNeededElement =
+    document.getElementById("xpNeeded");
+
+const clickValueElement =
+    document.getElementById("clickValue");
+
+const incomeElement =
+    document.getElementById("income");
+
+const companiesElement =
+    document.getElementById("companies");
+
+const employeesElement =
+    document.getElementById("employees");
+
+const tapButton =
+    document.getElementById("tapButton");
+
+const upgradeClickButton =
+    document.getElementById("upgradeClick");
+
+const upgradeIncomeButton =
+    document.getElementById("upgradeIncome");
 
 
-// تحديث الواجهة
+/* =========================
+   تحديث الواجهة
+========================= */
 
 function updateUI() {
 
@@ -314,7 +353,7 @@ function updateUI() {
         xpNeeded;
 
     clickValueElement.textContent =
-        clickValue;
+        clickValue.toLocaleString();
 
     incomeElement.textContent =
         Math.floor(incomePerSecond).toLocaleString();
@@ -325,43 +364,71 @@ function updateUI() {
     employeesElement.textContent =
         employees;
 
+
     upgradeClickButton.textContent =
         `تطوير $${clickUpgradeCost.toLocaleString()}`;
+
 
     upgradeIncomeButton.textContent =
         `تطوير $${incomeUpgradeCost.toLocaleString()}`;
 
-    document.getElementById("officeLevel").textContent =
+
+    document.getElementById(
+        "officeLevel"
+    ).textContent =
         officeLevel;
 
-    document.getElementById("secretaryName").textContent =
+
+    document.getElementById(
+        "secretaryName"
+    ).textContent =
         secretaryName || "غير محدد";
 
-    document.getElementById("fieldName").textContent =
-        selectedField
-        ? fields[selectedField].name
-        : "غير محدد";
 
-    document.getElementById("currentField").textContent =
+    document.getElementById(
+        "fieldName"
+    ).textContent =
         selectedField
-        ? `${fields[selectedField].icon} ${fields[selectedField].name}`
-        : "لم يتم اختيار مجال.";
+            ? fields[selectedField].name
+            : "غير محدد";
 
-    document.getElementById("profitIncome").textContent =
+
+    document.getElementById(
+        "currentField"
+    ).textContent =
+        selectedField
+            ? `${fields[selectedField].icon} ${fields[selectedField].name}`
+            : "لم يتم اختيار مجال.";
+
+
+    document.getElementById(
+        "profitIncome"
+    ).textContent =
         Math.floor(incomePerSecond).toLocaleString();
 
-    document.getElementById("profitLoss").textContent =
+
+    document.getElementById(
+        "profitLoss"
+    ).textContent =
         "0";
 
-    document.getElementById("netProfit").textContent =
+
+    document.getElementById(
+        "netProfit"
+    ).textContent =
         `+$${Math.floor(incomePerSecond).toLocaleString()}/ث`;
 
+
     renderResources();
+
     renderOwnedBuildings();
+
 }
 
 
-// XP
+/* =========================
+   XP
+========================= */
 
 function addXP(amount) {
 
@@ -374,89 +441,147 @@ function addXP(amount) {
         level++;
 
         xpNeeded =
-            Math.floor(xpNeeded * 1.35);
+            Math.floor(
+                xpNeeded * 1.35
+            );
 
-        money += level * 10;
+        money +=
+            level * 10;
 
         secretaryMessage(
             `وصلت إلى المستوى ${level} وحصلت على مكافأة.`
         );
+
     }
+
 }
 
 
-// الضغط
+/* =========================
+   الضغط
+========================= */
 
-tapButton.addEventListener("click", function () {
+tapButton.addEventListener(
+    "click",
+    function () {
 
-    money += clickValue;
+        money += clickValue;
 
-    addXP(2);
+        addXP(2);
 
-    updateUI();
+        gameSound("click");
 
-    saveGame();
+        updateUI();
 
-});
+        saveGame();
 
-
-// تطوير الضغطة
-
-upgradeClickButton.addEventListener("click", function () {
-
-    if (money < clickUpgradeCost) {
-        alert("فلوسك مش مكفية.");
-        return;
     }
+);
 
-    money -= clickUpgradeCost;
 
-    if (clickValue === 1) {
-        clickValue = 5;
-    } else {
-        clickValue += 5;
+/* =========================
+   تطوير قيمة الضغطة
+========================= */
+
+upgradeClickButton.addEventListener(
+    "click",
+    function () {
+
+        if (money < clickUpgradeCost) {
+
+            gameSound("error");
+
+            alert(
+                "فلوسك مش مكفية."
+            );
+
+            return;
+        }
+
+
+        money -= clickUpgradeCost;
+
+
+        if (clickValue === 1) {
+
+            clickValue = 5;
+
+        } else {
+
+            clickValue += 5;
+
+        }
+
+
+        clickUpgradeCost =
+            Math.floor(
+                clickUpgradeCost * 1.6
+            );
+
+
+        gameSound("upgrade");
+
+        updateUI();
+
+        saveGame();
+
     }
-
-    clickUpgradeCost =
-        Math.floor(clickUpgradeCost * 1.6);
-
-    updateUI();
-
-    saveGame();
-
-});
+);
 
 
-// تطوير الموظفين
+/* =========================
+   تطوير الموظفين
+========================= */
 
-upgradeIncomeButton.addEventListener("click", function () {
+upgradeIncomeButton.addEventListener(
+    "click",
+    function () {
 
-    if (money < incomeUpgradeCost) {
-        alert("فلوسك مش مكفية.");
-        return;
+        if (money < incomeUpgradeCost) {
+
+            gameSound("error");
+
+            alert(
+                "فلوسك مش مكفية."
+            );
+
+            return;
+        }
+
+
+        money -= incomeUpgradeCost;
+
+        incomePerSecond += 2;
+
+        employees++;
+
+
+        if (selectedField) {
+
+            produceResources(1);
+
+        }
+
+
+        incomeUpgradeCost =
+            Math.floor(
+                incomeUpgradeCost * 1.7
+            );
+
+
+        gameSound("upgrade");
+
+        updateUI();
+
+        saveGame();
+
     }
-
-    money -= incomeUpgradeCost;
-
-    incomePerSecond += 2;
-
-    employees++;
-
-    if (selectedField) {
-        produceResources(1);
-    }
-
-    incomeUpgradeCost =
-        Math.floor(incomeUpgradeCost * 1.7);
-
-    updateUI();
-
-    saveGame();
-
-});
+);
 
 
-// الإنتاج
+/* =========================
+   الإنتاج
+========================= */
 
 function produceResources(amount) {
 
@@ -464,151 +589,236 @@ function produceResources(amount) {
         return;
     }
 
+
     if (selectedField === "ranching") {
 
-        resources.sheep += amount * 2;
-        resources.meat += amount;
-        resources.milk += amount;
-        resources.leather += Math.floor(amount / 2);
+        resources.sheep +=
+            amount * 2;
+
+        resources.meat +=
+            amount;
+
+        resources.milk +=
+            amount;
+
+        resources.leather +=
+            Math.floor(amount / 2);
 
     }
+
 
     if (selectedField === "agriculture") {
 
-        resources.crops += amount * 3;
-        resources.products += amount;
+        resources.crops +=
+            amount * 3;
+
+        resources.products +=
+            amount;
 
     }
+
 
     if (selectedField === "industry") {
 
-        resources.factories += amount;
-        resources.products += amount * 2;
+        resources.factories +=
+            amount;
+
+        resources.products +=
+            amount * 2;
 
     }
+
 
     if (selectedField === "technology") {
 
-        resources.products += amount * 3;
+        resources.products +=
+            amount * 3;
 
     }
+
 }
 
 
-// الدخل التلقائي
+/* =========================
+   الدخل التلقائي
+========================= */
 
-setInterval(function () {
+setInterval(
+    function () {
 
-    if (incomePerSecond > 0) {
+        if (incomePerSecond > 0) {
 
-        money += incomePerSecond;
-
-        produceResources(
-            Math.max(1, Math.floor(incomePerSecond / 10))
-        );
-
-        addXP(
-            Math.max(
-                1,
-                Math.floor(incomePerSecond / 10)
-            )
-        );
-
-        updateUI();
-    }
-
-}, 1000);
+            money +=
+                incomePerSecond;
 
 
-// الصفحات
+            produceResources(
+                Math.max(
+                    1,
+                    Math.floor(
+                        incomePerSecond / 10
+                    )
+                )
+            );
+
+
+            addXP(
+                Math.max(
+                    1,
+                    Math.floor(
+                        incomePerSecond / 10
+                    )
+                )
+            );
+
+
+            updateUI();
+
+        }
+
+    },
+    1000
+);
+
+
+/* =========================
+   الصفحات
+========================= */
 
 function showPage(page) {
 
     document
         .querySelectorAll(".page")
-        .forEach(p => p.classList.remove("active"));
+        .forEach(
+            p =>
+                p.classList.remove("active")
+        );
+
 
     const element =
         document.getElementById(page);
 
+
     if (element) {
+
         element.classList.add("active");
+
     }
+
 
     if (page === "store") {
+
         storeCategory("realestate");
+
     }
+
 
     if (page === "companiesPage") {
+
         companyType("near");
+
     }
 
+
     if (page === "profits") {
+
         renderResources();
+
     }
+
 }
 
 
-// المتجر
+/* =========================
+   المتجر
+========================= */
 
 function storeCategory(category) {
 
     const container =
-        document.getElementById("products");
+        document.getElementById(
+            "products"
+        );
+
 
     container.innerHTML = "";
 
-    products[category].forEach((item, index) => {
 
-        const card =
-            document.createElement("div");
+    products[category].forEach(
+        (item, index) => {
 
-        card.className = "card";
+            const card =
+                document.createElement(
+                    "div"
+                );
 
-        card.innerHTML = `
 
-            <div class="image">
-                ${item.icon}
-            </div>
+            card.className =
+                "card";
 
-            <h3>${item.name}</h3>
 
-            <div class="price">
-                ${item.price.toLocaleString()} $
-            </div>
+            card.innerHTML = `
 
-            <p>${item.effect}</p>
+                <div class="image">
+                    ${item.icon}
+                </div>
 
-            <br>
+                <h3>
+                    ${item.name}
+                </h3>
 
-            <button
-                class="buy"
-                onclick="buyProduct('${category}', ${index})">
-                شراء
-            </button>
-        `;
+                <div class="price">
+                    ${item.price.toLocaleString()} $
+                </div>
 
-        container.appendChild(card);
+                <p>
+                    ${item.effect}
+                </p>
 
-    });
+                <br>
+
+                <button
+                    class="buy"
+                    onclick="buyProduct('${category}', ${index})">
+
+                    شراء
+
+                </button>
+            `;
+
+
+            container.appendChild(card);
+
+        }
+    );
+
 }
 
 
-// شراء
+/* =========================
+   شراء
+========================= */
 
 function buyProduct(category, index) {
 
     const item =
         products[category][index];
 
+
     if (money < item.price) {
 
-        alert("فلوسك مش مكفية.");
+        gameSound("error");
+
+        alert(
+            "فلوسك مش مكفية."
+        );
 
         return;
     }
 
+
     money -= item.price;
+
 
     if (category === "employees") {
 
@@ -616,48 +826,73 @@ function buyProduct(category, index) {
             item.name === "مبرمج" &&
             selectedField !== "technology"
         ) {
-            alert("المبرمج متخصص في مجال التكنولوجيا.");
+
+            alert(
+                "المبرمج متخصص في مجال التكنولوجيا."
+            );
+
             money += item.price;
+
             return;
         }
+
 
         if (
             item.name === "مزارع" &&
             selectedField !== "agriculture"
         ) {
-            alert("المزارع متخصص في مجال الزراعة.");
+
+            alert(
+                "المزارع متخصص في مجال الزراعة."
+            );
+
             money += item.price;
+
             return;
         }
+
 
         if (
             item.name === "راعي" &&
             selectedField !== "ranching"
         ) {
-            alert("الراعي متخصص في مجال الرعي.");
+
+            alert(
+                "الراعي متخصص في مجال الرعي."
+            );
+
             money += item.price;
+
             return;
         }
+
 
         if (
             item.name === "مهندس" &&
             selectedField !== "industry"
         ) {
-            alert("المهندس متخصص في مجال الصناعة.");
+
+            alert(
+                "المهندس متخصص في مجال الصناعة."
+            );
+
             money += item.price;
+
             return;
         }
 
+
         employees++;
+
 
         incomePerSecond +=
             item.name === "مدير"
-            ? 5
-            : item.name === "مبرمج"
-            ? 8
-            : item.name === "مسوق"
-            ? 6
-            : 2;
+                ? 5
+                : item.name === "مبرمج"
+                    ? 8
+                    : item.name === "مسوق"
+                        ? 6
+                        : 2;
 
     }
 
@@ -678,17 +913,27 @@ function buyProduct(category, index) {
             icon: item.icon
         });
 
+
         if (item.name === "شقة") {
+
             incomePerSecond += 1;
+
         }
+
 
         if (item.name === "مصنع") {
+
             incomePerSecond += 10;
+
             resources.factories++;
+
         }
 
+
         if (item.name === "مكتب") {
+
             officeLevel++;
+
         }
 
     }
@@ -698,6 +943,9 @@ function buyProduct(category, index) {
         `تم شراء ${item.name}.`
     );
 
+
+    gameSound("buy");
+
     updateUI();
 
     saveGame();
@@ -705,46 +953,69 @@ function buyProduct(category, index) {
 }
 
 
-// الشركات
+/* =========================
+   الشركات
+========================= */
 
 function companyType(type) {
 
     const list =
         type === "near"
-        ? nearbyCompanies
-        : worldCompanies;
+            ? nearbyCompanies
+            : worldCompanies;
+
 
     const container =
-        document.getElementById("companyList");
+        document.getElementById(
+            "companyList"
+        );
+
 
     container.innerHTML = "";
+
 
     list.forEach(company => {
 
         const div =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        div.className = "company";
+
+        div.className =
+            "company";
+
 
         const action =
             level >= 10
-            ? `<button
-                class="buy"
-                onclick="requestAlliance('${company.name}')">
-                طلب تحالف
-               </button>`
-            : `<p>
-                ستتاح التحالفات من المستوى 10.
-               </p>`;
+
+                ? `<button
+                    class="buy"
+                    onclick="requestAlliance('${company.name}')">
+
+                    طلب تحالف
+
+                   </button>`
+
+                : `<p>
+                    ستتاح التحالفات من المستوى 10.
+                   </p>`;
+
 
         div.innerHTML = `
 
-            <h3>🏢 ${company.name}</h3>
+            <h3>
+                🏢 ${company.name}
+            </h3>
 
-            <p>المجال: ${company.type}</p>
+            <p>
+                المجال:
+                ${company.type}
+            </p>
 
             <p class="wealth">
-                الثروة: ${company.wealth}
+                الثروة:
+                ${company.wealth}
             </p>
 
             <p class="risk">
@@ -755,72 +1026,114 @@ function companyType(type) {
             <br>
 
             ${action}
+
         `;
+
 
         container.appendChild(div);
 
     });
+
 }
 
 
-// طلب التحالف
+/* =========================
+   التحالف
+========================= */
 
 function requestAlliance(companyName) {
 
-    selectedCompany = companyName;
+    selectedCompany =
+        companyName;
+
 
     addNews(
         `تم إرسال طلب تحالف إلى ${companyName}.`
     );
 
+
     secretaryMessage(
         `تم إرسال طلب التحالف إلى ${companyName}. هنستنى رد الشركة.`
     );
 
-    setTimeout(function () {
 
-        generateContract(companyName);
+    setTimeout(
+        function () {
 
-    }, 2500);
+            generateContract(
+                companyName
+            );
+
+        },
+        2500
+    );
+
 
     saveGame();
+
 }
 
 
-// إنشاء العقد
+/* =========================
+   العقد
+========================= */
 
 function generateContract(companyName) {
 
     let contract;
 
+
     if (
         companyName === "شركة النيل للتجارة"
-        && selectedField === "ranching"
+        &&
+        selectedField === "ranching"
     ) {
 
         contract = {
 
             company: companyName,
 
-            title: "عقد توريد اللحوم",
+            title:
+                "عقد توريد اللحوم",
 
             text: `
-                <strong>الشركة:</strong> شركة النيل للتجارة<br><br>
 
-                <strong>الشروط:</strong><br>
+                <strong>
+                    الشركة:
+                </strong>
+                شركة النيل للتجارة
+
+                <br><br>
+
+                <strong>
+                    الشروط:
+                </strong>
+
+                <br>
 
                 تلتزم إمبراطوريتك بتوريد
-                <strong>10,000 كجم من اللحوم</strong>.<br><br>
+                <strong>
+                    10,000 كجم من اللحوم
+                </strong>.
+
+                <br><br>
 
                 تدفع شركة النيل مبلغ
-                <strong>100,000$</strong>
-                مقابل الكمية كاملة.<br><br>
+                <strong>
+                    100,000$
+                </strong>
+                مقابل الكمية كاملة.
+
+                <br><br>
 
                 يتم تنفيذ العقد عند قبولك.
+
             `,
 
             reward: 100000,
+
             resource: "meat",
+
             amount: 10000
 
         };
@@ -831,52 +1144,93 @@ function generateContract(companyName) {
 
             company: companyName,
 
-            title: "عقد تجاري",
+            title:
+                "عقد تجاري",
 
             text: `
-                <strong>الشركة:</strong> ${companyName}<br><br>
+
+                <strong>
+                    الشركة:
+                </strong>
+                ${companyName}
+
+                <br><br>
 
                 ترغب الشركة في التعاون مع إمبراطوريتك
                 وشراء منتجات من مجال
+
                 <strong>
-                    ${selectedField
-                        ? fields[selectedField].name
-                        : "مجالك الحالي"}
-                </strong>.<br><br>
+
+                    ${
+                        selectedField
+                            ? fields[selectedField].name
+                            : "مجالك الحالي"
+                    }
+
+                </strong>.
+
+                <br><br>
 
                 قيمة الصفقة:
-                <strong>100,000$</strong>.<br><br>
+                <strong>
+                    100,000$
+                </strong>.
+
+                <br><br>
 
                 يتم تنفيذ الصفقة بعد توقيع العقد.
+
             `,
 
             reward: 100000,
+
             resource: "products",
+
             amount: 100
 
         };
 
     }
 
-    currentContract = contract;
 
-    document.getElementById("contractTitle").textContent =
+    currentContract =
+        contract;
+
+
+    document.getElementById(
+        "contractTitle"
+    ).textContent =
         contract.title;
 
-    document.getElementById("contractText").innerHTML =
-        `<div class="contract-text">${contract.text}</div>`;
 
-    showPage("contractPage");
+    document.getElementById(
+        "contractText"
+    ).innerHTML =
+        `<div class="contract-text">
+            ${contract.text}
+         </div>`;
+
+
+    showPage(
+        "contractPage"
+    );
+
 
     secretaryMessage(
         `وصل رد من ${companyName}. بعتولنا عقد للمراجعة والتوقيع.`
     );
 
+
+    gameSound("notification");
+
     saveGame();
+
 }
 
 
-// قبول العقد
+/* =========================
+   قبول العقد
+========================= */
 
 function acceptContract() {
 
@@ -884,12 +1238,18 @@ function acceptContract() {
         return;
     }
 
+
     const contract =
         currentContract;
 
+
     if (
-        resources[contract.resource] < contract.amount
+        resources[contract.resource]
+        <
+        contract.amount
     ) {
+
+        gameSound("error");
 
         alert(
             `الإنتاج غير كافي لتنفيذ العقد. مطلوب ${contract.amount.toLocaleString()} من المورد المطلوب.`
@@ -898,33 +1258,50 @@ function acceptContract() {
         return;
     }
 
+
     resources[contract.resource] -=
         contract.amount;
+
 
     money +=
         contract.reward;
 
+
     companies++;
+
 
     addNews(
         `تم تنفيذ عقد ${contract.company} وحصلت على $${contract.reward.toLocaleString()}.`
     );
 
+
     secretaryMessage(
         `العقد مع ${contract.company} اتنفذ بنجاح. دخل الإمبراطورية زاد.`
     );
 
-    currentContract = null;
 
-    showPage("profits");
+    currentContract =
+        null;
+
+
+    gameSound("notification");
+
+
+    showPage(
+        "profits"
+    );
+
 
     updateUI();
 
     saveGame();
+
 }
 
 
-// رفض العقد
+/* =========================
+   رفض العقد
+========================= */
 
 function rejectContract() {
 
@@ -932,177 +1309,226 @@ function rejectContract() {
         return;
     }
 
+
     addNews(
         `تم رفض عقد ${currentContract.company}.`
     );
+
 
     secretaryMessage(
         `رفضنا عقد ${currentContract.company}.`
     );
 
-    currentContract = null;
 
-    showPage("companiesPage");
+    currentContract =
+        null;
+
+
+    gameSound("notification");
+
+
+    showPage(
+        "companiesPage"
+    );
+
 
     saveGame();
+
 }
 
 
-// السكرتير
+/* =========================
+   السكرتير
+========================= */
 
 function setSecretary() {
 
     const input =
-        document.getElementById("secretaryInput");
+        document.getElementById(
+            "secretaryInput"
+        );
+
 
     const name =
         input.value.trim();
+
 
     if (!name) {
         return;
     }
 
-    secretaryName = name;
+
+    secretaryName =
+        name;
+
 
     addNews(
         `تم تعيين ${secretaryName} كسكرتير.`
     );
 
+
     secretaryMessage(
         `تم تعييني رسميًا. أنا ${secretaryName}.`
     );
 
+
     updateUI();
 
     saveGame();
+
 }
 
 
-// كلام السكرتير
+/* =========================
+   كلام السكرتير
+========================= */
 
 function talkToSecretary() {
 
     const input =
-        document.getElementById("secretaryChatInput");
+        document.getElementById(
+            "secretaryChatInput"
+        );
+
 
     const message =
-        input.value.trim().toLowerCase();
+        input.value
+            .trim()
+            .toLowerCase();
+
 
     if (!message) {
         return;
     }
 
+
     secretaryMessage(
         `أنت: ${input.value}`
     );
 
+
     let reply = "";
+
 
     if (
         message.includes("خبر")
-        || message.includes("اخبار")
-        || message.includes("أخبار")
+        ||
+        message.includes("اخبار")
+        ||
+        message.includes("أخبار")
     ) {
 
         reply =
             news.length
-            ? `آخر الأخبار: ${news[0]}`
-            : "مفيش أخبار جديدة حاليًا.";
+                ? `آخر الأخبار: ${news[0]}`
+                : "مفيش أخبار جديدة حاليًا.";
 
-    } else if (
+    }
+
+
+    else if (
         message.includes("فلوس")
-        || message.includes("مال")
+        ||
+        message.includes("مال")
     ) {
 
         reply =
             `الخزينة فيها ${Math.floor(money).toLocaleString()}$.`;
 
-    } else if (
+    }
+
+
+    else if (
         message.includes("شركة")
-        || message.includes("شركات")
+        ||
+        message.includes("شركات")
     ) {
 
         reply =
             `عندنا حاليًا ${companies} شركة.`;
 
-    } else if (
+    }
+
+
+    else if (
         message.includes("موظف")
-        || message.includes("موظفين")
+        ||
+        message.includes("موظفين")
     ) {
 
         reply =
             `عندنا ${employees} موظف، والدخل ${incomePerSecond}$ في الثانية.`;
 
-    } else if (
+    }
+
+
+    else if (
         message.includes("مجال")
     ) {
 
         reply =
             selectedField
-            ? `مجالنا الحالي هو ${fields[selectedField].name}.`
-            : "لسه مفيش مجال متحدد.";
+                ? `مجالنا الحالي هو ${fields[selectedField].name}.`
+                : "لسه مفيش مجال متحدد.";
 
-    } else if (
+    }
+
+
+    else if (
         message.includes("انتاج")
-        || message.includes("إنتاج")
-        || message.includes("منتج")
+        ||
+        message.includes("إنتاج")
+        ||
+        message.includes("منتج")
     ) {
 
         reply =
             "هعرضلك الإنتاج الحالي في زرار الأرباح.";
 
-    } else if (
+    }
+
+
+    else if (
         message.includes("تحالف")
     ) {
 
         reply =
             "من قسم الشركات تقدر تبعت طلب تحالف، والشركة هترد بعقد.";
 
-    } else {
+    }
+
+
+    else {
 
         reply =
             "أقدر أساعدك في الأخبار، الفلوس، الشركات، الموظفين، الإنتاج، المجال والتحالفات.";
 
     }
 
-    setTimeout(function () {
 
-        secretaryMessage(
-            `${secretaryName || "السكرتير"}: ${reply}`
-        );
+    setTimeout(
+        function () {
 
-    }, 400);
+            secretaryMessage(
+                `${secretaryName || "السكرتير"}: ${reply}`
+            );
+
+        },
+        400
+    );
+
 
     input.value = "";
+
 }
 
 
-// رسائل السكرتير
-
-function secretaryMessage(text) {
-
-    const box =
-        document.getElementById("secretaryMessages");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        "secretary-message";
-
-    message.textContent =
-        text;
-
-    box.appendChild(message);
-
-    box.scrollTop =
-        box.scrollHeight;
-}
-
-
-// الأخبار الداخلية
+/* =========================
+   الأخبار
+========================= */
 
 let news = [];
+
 
 function addNews(text) {
 
@@ -1115,9 +1541,11 @@ function addNews(text) {
             }
         );
 
+
     news.unshift(
         `${time} - ${text}`
     );
+
 
     news =
         news.slice(0, 30);
@@ -1125,56 +1553,78 @@ function addNews(text) {
 }
 
 
-// المجالات
+/* =========================
+   اختيار المجال
+========================= */
 
 function openFieldSelector() {
 
-    showPage("fieldPage");
+    showPage(
+        "fieldPage"
+    );
+
 
     const container =
-        document.getElementById("fieldList");
+        document.getElementById(
+            "fieldList"
+        );
+
 
     container.innerHTML = "";
 
-    Object.keys(fields).forEach(key => {
 
-        const field =
-            fields[key];
+    Object.keys(fields).forEach(
+        key => {
 
-        const div =
-            document.createElement("div");
+            const field =
+                fields[key];
 
-        div.className =
-            "field-option";
 
-        const price =
-            selectedField
-            ? "2,000,000$"
-            : "مجاني عند البداية";
+            const div =
+                document.createElement(
+                    "div"
+                );
 
-        div.innerHTML = `
 
-            <h3>
-                ${field.icon}
-                ${field.name}
-            </h3>
+            div.className =
+                "field-option";
 
-            <p>
-                الموظفون الأساسيون:
-                ${field.employees.join("، ")}
-            </p>
 
-            <button
-                class="upgrade-button"
-                onclick="selectField('${key}')">
-                اختيار - ${price}
-            </button>
+            const price =
+                selectedField
+                    ? "2,000,000$"
+                    : "مجاني عند البداية";
 
-        `;
 
-        container.appendChild(div);
+            div.innerHTML = `
 
-    });
+                <h3>
+                    ${field.icon}
+                    ${field.name}
+                </h3>
+
+                <p>
+                    الموظفون الأساسيون:
+                    ${field.employees.join("، ")}
+                </p>
+
+                <button
+                    class="upgrade-button"
+                    onclick="selectField('${key}')">
+
+                    اختيار -
+                    ${price}
+
+                </button>
+
+            `;
+
+
+            container.appendChild(div);
+
+        }
+    );
+
 }
 
 
@@ -1182,10 +1632,13 @@ function selectField(fieldKey) {
 
     if (selectedField === fieldKey) {
 
-        alert("أنت بالفعل تعمل في هذا المجال.");
+        alert(
+            "أنت بالفعل تعمل في هذا المجال."
+        );
 
         return;
     }
+
 
     if (selectedField) {
 
@@ -1198,36 +1651,53 @@ function selectField(fieldKey) {
             return;
         }
 
-        money -= 2000000;
+
+        money -=
+            2000000;
+
     }
+
 
     selectedField =
         fieldKey;
+
 
     secretaryMessage(
         `تم اختيار مجال ${fields[fieldKey].name}.`
     );
 
+
     addNews(
         `تم اختيار مجال ${fields[fieldKey].name}.`
     );
+
 
     updateUI();
 
     saveGame();
 
-    showPage("home");
+
+    showPage(
+        "home"
+    );
+
 }
 
 
-// الأرباح والموارد
+/* =========================
+   الموارد
+========================= */
 
 function renderResources() {
 
     const container =
-        document.getElementById("resourceList");
+        document.getElementById(
+            "resourceList"
+        );
+
 
     container.innerHTML = "";
+
 
     if (!selectedField) {
 
@@ -1239,156 +1709,227 @@ function renderResources() {
         return;
     }
 
-    fields[selectedField].resources.forEach(item => {
 
-        const row =
-            document.createElement("div");
+    fields[selectedField].resources
+        .forEach(item => {
 
-        row.className =
-            "resource-row";
+            const row =
+                document.createElement(
+                    "div"
+                );
 
-        row.innerHTML = `
 
-            <span>
-                ${item[0]} ${item[1]}
-            </span>
+            row.className =
+                "resource-row";
 
-            <strong>
-                ${(resources[item[2]] || 0).toLocaleString()}
-            </strong>
 
-        `;
+            row.innerHTML = `
 
-        container.appendChild(row);
+                <span>
+                    ${item[0]}
+                    ${item[1]}
+                </span>
 
-    });
+                <strong>
+                    ${(resources[item[2]] || 0).toLocaleString()}
+                </strong>
+
+            `;
+
+
+            container.appendChild(row);
+
+        });
+
 }
 
 
-// العقارات على الخريطة
+/* =========================
+   المباني
+========================= */
 
 function renderOwnedBuildings() {
 
     const container =
-        document.getElementById("ownedBuildings");
+        document.getElementById(
+            "ownedBuildings"
+        );
+
 
     if (!container) {
         return;
     }
 
+
     container.innerHTML = "";
 
+
     const positions = [
+
         [35, 250],
         [120, 310],
         [250, 280],
         [180, 100],
         [330, 160],
         [70, 150]
+
     ];
 
-    ownedProperties.forEach((property, index) => {
 
-        const building =
-            document.createElement("div");
+    ownedProperties.forEach(
+        (property, index) => {
 
-        building.className =
-            "owned-building";
+            const building =
+                document.createElement(
+                    "div"
+                );
 
-        building.textContent =
-            property.icon;
 
-        const pos =
-            positions[index % positions.length];
+            building.className =
+                "owned-building";
 
-        building.style.left =
-            pos[0] + "px";
 
-        building.style.top =
-            pos[1] + "px";
+            building.textContent =
+                property.icon;
 
-        container.appendChild(building);
 
-    });
+            const pos =
+                positions[
+                    index %
+                    positions.length
+                ];
+
+
+            building.style.left =
+                pos[0] + "px";
+
+
+            building.style.top =
+                pos[1] + "px";
+
+
+            container.appendChild(
+                building
+            );
+
+        }
+    );
+
 }
 
 
-// زوم الخريطة
+/* =========================
+   زوم
+========================= */
 
 function zoomMap(amount) {
 
-    mapZoom += amount * 0.1;
+    mapZoom +=
+        amount * 0.1;
+
 
     if (mapZoom < 0.8) {
         mapZoom = 0.8;
     }
 
+
     if (mapZoom > 1.6) {
         mapZoom = 1.6;
     }
 
-    document.querySelector(".map").style.transform =
+
+    document.querySelector(
+        ".map"
+    ).style.transform =
         `scale(${mapZoom})`;
 
 }
 
 
-// المكتب
+/* =========================
+   المكتب
+========================= */
 
 document
     .getElementById("upgradeOffice")
-    .addEventListener("click", function () {
+    .addEventListener(
+        "click",
+        function () {
 
-        if (money < officeUpgradeCost) {
+            if (money < officeUpgradeCost) {
 
-            alert("فلوسك مش مكفية.");
+                gameSound("error");
 
-            return;
-        }
+                alert(
+                    "فلوسك مش مكفية."
+                );
 
-        money -= officeUpgradeCost;
+                return;
+            }
 
-        officeLevel++;
 
-        officeUpgradeCost =
-            Math.floor(
-                officeUpgradeCost * 2
+            money -=
+                officeUpgradeCost;
+
+
+            officeLevel++;
+
+
+            officeUpgradeCost =
+                Math.floor(
+                    officeUpgradeCost * 2
+                );
+
+
+            incomePerSecond += 5;
+
+
+            addNews(
+                `تم تطوير المكتب إلى المستوى ${officeLevel}.`
             );
 
-        incomePerSecond += 5;
 
-        addNews(
-            `تم تطوير المكتب إلى المستوى ${officeLevel}.`
-        );
-
-        updateUI();
-
-        saveGame();
-
-    });
+            gameSound("upgrade");
 
 
-// حفظ
+            updateUI();
+
+            saveGame();
+
+        }
+    );
+
+
+/* =========================
+   الحفظ
+========================= */
 
 function saveGame() {
 
     const data = {
 
         money,
+
         clickValue,
+
         incomePerSecond,
 
         level,
+
         xp,
+
         xpNeeded,
 
         companies,
+
         employees,
 
         officeLevel,
 
         clickUpgradeCost,
+
         incomeUpgradeCost,
+
         officeUpgradeCost,
 
         secretaryName,
@@ -1403,14 +1944,18 @@ function saveGame() {
 
     };
 
+
     localStorage.setItem(
         "tapEmpireSave",
         JSON.stringify(data)
     );
+
 }
 
 
-// تحميل
+/* =========================
+   التحميل
+========================= */
 
 function loadGame() {
 
@@ -1419,74 +1964,94 @@ function loadGame() {
             "tapEmpireSave"
         );
 
+
     if (!saved) {
         return;
     }
+
 
     try {
 
         const data =
             JSON.parse(saved);
 
+
         money =
             data.money ?? money;
 
+
         clickValue =
             data.clickValue ?? clickValue;
+
 
         incomePerSecond =
             data.incomePerSecond ??
             incomePerSecond;
 
+
         level =
             data.level ?? level;
+
 
         xp =
             data.xp ?? xp;
 
+
         xpNeeded =
             data.xpNeeded ?? xpNeeded;
+
 
         companies =
             data.companies ?? companies;
 
+
         employees =
             data.employees ?? employees;
+
 
         officeLevel =
             data.officeLevel ??
             officeLevel;
 
+
         clickUpgradeCost =
             data.clickUpgradeCost ??
             clickUpgradeCost;
+
 
         incomeUpgradeCost =
             data.incomeUpgradeCost ??
             incomeUpgradeCost;
 
+
         officeUpgradeCost =
             data.officeUpgradeCost ??
             officeUpgradeCost;
+
 
         secretaryName =
             data.secretaryName ??
             secretaryName;
 
+
         news =
             data.news ?? news;
+
 
         selectedField =
             data.selectedField ??
             selectedField;
 
+
         resources =
             data.resources ??
             resources;
 
+
         ownedProperties =
             data.ownedProperties ??
             ownedProperties;
+
 
     } catch (error) {
 
@@ -1496,136 +2061,170 @@ function loadGame() {
         );
 
     }
-}
-
-
-// تشغيل
-
-loadGame();
-
-updateUI();
-
-storeCategory("realestate");
-
-companyType("near");
-
-
-// لو أول تشغيل
-
-if (!selectedField) {
-
-    setTimeout(function () {
-
-        openFieldSelector();
-
-    }, 300);
 
 }
 
 
-// حفظ تلقائي
-
-setInterval(
-    saveGame,
-    5000
-);
-
-window.addEventListener(
-    "beforeunload",
-    saveGame
-);
-
-/* ===== TAP EMPIRE AUDIO SYSTEM ===== */
+/* =========================
+   نظام الصوت
+========================= */
 
 let audioEnabled = true;
+
 let audioContext = null;
+
 let musicTimer = null;
 
+
 function getAudioContext() {
+
     if (!audioContext) {
-        audioContext = new (
-            window.AudioContext ||
-            window.webkitAudioContext
-        )();
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
     }
 
-    if (audioContext.state === "suspended") {
+
+    if (
+        audioContext.state ===
+        "suspended"
+    ) {
+
         audioContext.resume();
+
     }
+
 
     return audioContext;
+
 }
 
 
-/* مؤثر صوتي بسيط */
 function gameSound(type) {
 
-    if (!audioEnabled) return;
+    if (!audioEnabled) {
+        return;
+    }
 
-    const ctx = getAudioContext();
 
-    const oscillator = ctx.createOscillator();
-    const gain = ctx.createGain();
+    const ctx =
+        getAudioContext();
+
+
+    const oscillator =
+        ctx.createOscillator();
+
+
+    const gain =
+        ctx.createGain();
+
 
     oscillator.connect(gain);
-    gain.connect(ctx.destination);
+
+    gain.connect(
+        ctx.destination
+    );
+
 
     let frequency = 500;
+
     let duration = 0.08;
 
+
     if (type === "click") {
+
         frequency = 650;
         duration = 0.05;
+
     }
+
 
     if (type === "buy") {
+
         frequency = 800;
         duration = 0.12;
+
     }
+
 
     if (type === "upgrade") {
+
         frequency = 1000;
         duration = 0.18;
+
     }
+
 
     if (type === "error") {
+
         frequency = 180;
         duration = 0.18;
+
     }
+
 
     if (type === "notification") {
+
         frequency = 700;
         duration = 0.15;
+
     }
 
-    oscillator.frequency.value = frequency;
-    oscillator.type = "sine";
 
-    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    oscillator.frequency.value =
+        frequency;
+
+
+    oscillator.type =
+        "sine";
+
+
+    gain.gain.setValueAtTime(
+        0.08,
+        ctx.currentTime
+    );
+
 
     gain.gain.exponentialRampToValueAtTime(
         0.001,
         ctx.currentTime + duration
     );
 
+
     oscillator.start();
+
 
     oscillator.stop(
         ctx.currentTime + duration
     );
+
 }
 
 
-/* موسيقى خلفية بسيطة */
+/* =========================
+   الموسيقى
+========================= */
+
 function startBackgroundMusic() {
 
-    if (!audioEnabled || musicTimer) {
+    if (
+        !audioEnabled ||
+        musicTimer
+    ) {
         return;
     }
 
-    const ctx = getAudioContext();
+
+    const ctx =
+        getAudioContext();
+
 
     const notes = [
+
         261.63,
         329.63,
         392.00,
@@ -1634,9 +2233,12 @@ function startBackgroundMusic() {
         349.23,
         440.00,
         349.23
+
     ];
 
+
     let index = 0;
+
 
     function playNote() {
 
@@ -1644,165 +2246,126 @@ function startBackgroundMusic() {
             return;
         }
 
+
         const oscillator =
             ctx.createOscillator();
+
 
         const gain =
             ctx.createGain();
 
+
         oscillator.connect(gain);
-        gain.connect(ctx.destination);
+
+        gain.connect(
+            ctx.destination
+        );
+
 
         oscillator.frequency.value =
             notes[index];
 
-        oscillator.type = "sine";
+
+        oscillator.type =
+            "sine";
+
 
         gain.gain.setValueAtTime(
             0.018,
             ctx.currentTime
         );
 
+
         gain.gain.exponentialRampToValueAtTime(
             0.001,
             ctx.currentTime + 0.45
         );
 
+
         oscillator.start();
+
 
         oscillator.stop(
             ctx.currentTime + 0.45
         );
 
+
         index++;
 
-        if (index >= notes.length) {
+
+        if (
+            index >= notes.length
+        ) {
+
             index = 0;
+
         }
+
     }
+
 
     playNote();
 
-    musicTimer = setInterval(
-        playNote,
-        550
-    );
+
+    musicTimer =
+        setInterval(
+            playNote,
+            550
+        );
+
 }
 
 
-/* إيقاف الموسيقى */
 function stopBackgroundMusic() {
 
     if (musicTimer) {
 
-        clearInterval(musicTimer);
+        clearInterval(
+            musicTimer
+        );
 
         musicTimer = null;
+
     }
+
 }
 
 
-/* تشغيل / إيقاف الصوت */
 function toggleGameAudio() {
 
     audioEnabled =
         !audioEnabled;
 
+
     if (audioEnabled) {
 
         startBackgroundMusic();
 
-        gameSound("notification");
+        gameSound(
+            "notification"
+        );
 
     } else {
 
         stopBackgroundMusic();
-    }
-}
-
-
-/* صوت الضغط */
-if (tapButton) {
-
-    tapButton.addEventListener(
-        "click",
-        function () {
-
-            gameSound("click");
-
-        }
-    );
-}
-
-
-/* أصوات أزرار التطوير */
-if (upgradeClickButton) {
-
-    upgradeClickButton.addEventListener(
-        "click",
-        function () {
-
-            if (money >= clickUpgradeCost) {
-                gameSound("upgrade");
-            } else {
-                gameSound("error");
-            }
-
-        }
-    );
-}
-
-
-if (upgradeIncomeButton) {
-
-    upgradeIncomeButton.addEventListener(
-        "click",
-        function () {
-
-            if (money >= incomeUpgradeCost) {
-                gameSound("upgrade");
-            } else {
-                gameSound("error");
-            }
-
-        }
-    );
-}
-
-
-/* صوت الشراء */
-const originalBuyProduct =
-    buyProduct;
-
-buyProduct = function(category, index) {
-
-    const item =
-        products[category][index];
-
-    if (money >= item.price) {
-
-        gameSound("buy");
-
-    } else {
-
-        gameSound("error");
 
     }
 
-    return originalBuyProduct(
-        category,
-        index
-    );
-};
+}
 
 
-/* السكرتير يتكلم بصوت الجهاز */
+/* =========================
+   صوت السكرتير
+========================= */
+
 const originalSecretaryMessage =
     secretaryMessage;
+
 
 secretaryMessage = function(text) {
 
     originalSecretaryMessage(text);
+
 
     if (
         audioEnabled &&
@@ -1812,43 +2375,132 @@ secretaryMessage = function(text) {
         const cleanText =
             String(text)
                 .replace("أنت:", "")
-                .replace(/<[^>]*>/g, "");
+                .replace(
+                    /<[^>]*>/g,
+                    ""
+                );
+
 
         const speech =
             new SpeechSynthesisUtterance(
                 cleanText
             );
 
-        speech.lang = "ar-EG";
 
-        speech.rate = 0.95;
+        speech.lang =
+            "ar-EG";
 
-        speech.pitch = 1;
 
-        speech.volume = 0.8;
+        speech.rate =
+            0.95;
+
+
+        speech.pitch =
+            1;
+
+
+        speech.volume =
+            0.8;
+
 
         window.speechSynthesis.cancel();
+
 
         window.speechSynthesis.speak(
             speech
         );
+
     }
+
 };
 
 
-/* تشغيل الموسيقى بعد أول لمسة */
-document.addEventListener(
-    "click",
-    function startAudioOnce() {
+/* =========================
+   تشغيل اللعبة
+========================= */
 
-        startBackgroundMusic();
+loadGame();
 
-        document.removeEventListener(
-            "click",
-            startAudioOnce
-        );
+updateUI();
 
-    },
-    { once: true }
+storeCategory(
+    "realestate"
 );
 
+companyType(
+    "near"
+);
+
+
+/* =========================
+   شاشة البداية
+========================= */
+
+const introScreen =
+    document.getElementById(
+        "introScreen"
+    );
+
+
+const startGameButton =
+    document.getElementById(
+        "startGameButton"
+    );
+
+
+if (startGameButton) {
+
+    startGameButton.addEventListener(
+        "click",
+        function () {
+
+            introScreen.classList.add(
+                "hidden"
+            );
+
+
+            gameSound(
+                "notification"
+            );
+
+
+            startBackgroundMusic();
+
+        }
+    );
+
+}
+
+
+/* =========================
+   أول تشغيل
+========================= */
+
+if (!selectedField) {
+
+    setTimeout(
+        function () {
+
+            openFieldSelector();
+
+        },
+        300
+    );
+
+}
+
+
+/* =========================
+   حفظ تلقائي
+========================= */
+
+setInterval(
+    saveGame,
+    5000
+);
+
+
+window.addEventListener(
+    "beforeunload",
+    saveGame
+);
