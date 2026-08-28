@@ -1,4 +1,4 @@
-name: Build APK
+name: Build AAB
 
 on:
   workflow_dispatch:
@@ -28,14 +28,14 @@ jobs:
           distribution: temurin
           java-version: 21
 
-      - name: Build APK
+      - name: Build AAB
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew bundleRelease
 
-      - name: Upload APK
+      - name: Upload AAB
         uses: actions/upload-artifact@v4
         with:
-          name: Tap-Empire
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: Tap Empire AAB
+          path: android/app/build/outputs/bundle/release/app-release.aab
